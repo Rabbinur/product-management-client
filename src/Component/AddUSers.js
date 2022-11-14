@@ -5,6 +5,23 @@ const AddUSers = () => {
   const handleAddUsers = (event) => {
     event.preventDefault();
     console.log(users);
+
+    //fetching data store to server
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert("User added successfully"); //alert message
+          event.target.reset();
+        }
+        console.log(data);
+      });
   };
 
   //blur use korle sob ekbare neoa jai
