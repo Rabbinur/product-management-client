@@ -7,6 +7,21 @@ const Update = () => {
   const handleUpdateUsers = (event) => {
     event.preventDefault();
     console.log(users);
+    fetch(`http://localhost:5000/users/${storedUsers._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          alert("update successfully");
+          console.log(data);
+          //   event.target.reset();
+        }
+      });
   };
 
   //blur use korle sob ekbare neoa jai
