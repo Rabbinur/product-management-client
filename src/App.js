@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Component/Home";
 import AddUSers from "./Component/AddUSers";
+import Update from "./Component/Update";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,6 +16,10 @@ function App() {
     {
       path: "/users/add",
       element: <AddUSers></AddUSers>,
+    },
+    {
+      path: "/update/:id",
+      element: <Update></Update>,
     },
   ]);
 

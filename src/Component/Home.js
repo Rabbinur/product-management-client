@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Home = () => {
   const users = useLoaderData();
@@ -19,10 +19,11 @@ const Home = () => {
         .then((data) => {
           if (data.deletedCount > 0) {
             alert("user deleted successfully");
-            const reaminingUsers = displayUsers.filter(
+            //remaining id display korbe without refreshing
+            const remainingUsers = displayUsers.filter(
               (usr) => usr._id !== user._id
             );
-            setDisplayUsers(reaminingUsers);
+            setDisplayUsers(remainingUsers);
           }
 
           console.log(data);
@@ -31,11 +32,15 @@ const Home = () => {
   };
   return (
     <div>
-      <h2>Users:{users.length}</h2>
+      <h2>Users:{displayUsers.length}</h2>
       <div>
-        {users.map((user) => (
+        {displayUsers.map((user) => (
           <p key={user._id}>
             {user.email}
+            <Link to={`/update/${user._id}`}>
+              <button>Update</button>
+            </Link>
+
             <button onClick={() => handleDelete(user)}> X</button>
           </p>
         ))}
